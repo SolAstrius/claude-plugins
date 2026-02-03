@@ -20,6 +20,13 @@
       "description": "Python tooling via Astral's ty (type checking) and Ruff (linting/formatting)",
       "version": "1.0.0",
       "keywords": ["python", "type-checking", "linting", "formatting", "lsp", "astral", "ty", "ruff"]
+    },
+    {
+      "name": "nix-lsp",
+      "source": "./plugins/nix-lsp",
+      "description": "Nix language support via nixd with nixfmt formatting",
+      "version": "1.0.0",
+      "keywords": ["nix", "nixos", "home-manager", "flakes", "lsp", "nixd", "nixfmt"]
     }
   ]
 }

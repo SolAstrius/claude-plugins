@@ -22,6 +22,7 @@ Then install plugins:
 |--------|-------------|
 | example-tools | Example plugin with a simple greeting skill |
 | astral-python | Python tooling via [ty](https://docs.astral.sh/ty/) + [Ruff](https://docs.astral.sh/ruff/) (requires `ty` and `ruff` binaries) |
+| nix-lsp | Nix language support via [nixd](https://github.com/nix-community/nixd) + [nixfmt](https://github.com/NixOS/nixfmt) (requires `nixd` and `nixfmt` binaries) |
 
 ## Creating New Plugins
 

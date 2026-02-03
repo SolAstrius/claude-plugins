@@ -1,0 +1,10 @@
+{
+  "name": "nix-lsp",
+  "description": "Nix language support via nixd (type checking, options completion, go-to-definition) with nixfmt formatting",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "homepage": "https://github.com/nix-community/nixd",
+  "keywords": ["nix", "nixos", "home-manager", "flakes", "lsp", "nixd", "nixfmt"]
+}
