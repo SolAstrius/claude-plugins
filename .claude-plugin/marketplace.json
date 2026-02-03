@@ -1,0 +1,18 @@
+{
+  "name": "sol-plugins",
+  "owner": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "metadata": {
+    "description": "Personal plugin marketplace for Claude Code extensions",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "example-tools",
+      "source": "./plugins/example-tools",
+      "description": "Example plugin with a simple greeting skill",
+      "version": "1.0.0"
+    }
+  ]
+}
