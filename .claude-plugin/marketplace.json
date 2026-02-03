@@ -13,6 +13,13 @@
       "source": "./plugins/example-tools",
       "description": "Example plugin with a simple greeting skill",
       "version": "1.0.0"
+    },
+    {
+      "name": "ty-lsp",
+      "source": "./plugins/ty-lsp",
+      "description": "Python type checking and code intelligence via ty (Astral)",
+      "version": "1.0.0",
+      "keywords": ["python", "type-checking", "lsp", "astral"]
     }
   ]
 }

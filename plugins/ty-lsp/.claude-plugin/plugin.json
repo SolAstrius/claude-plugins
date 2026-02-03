@@ -1,0 +1,10 @@
+{
+  "name": "ty-lsp",
+  "description": "Python type checking and code intelligence via ty (Astral)",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "homepage": "https://docs.astral.sh/ty/",
+  "keywords": ["python", "type-checking", "lsp", "astral", "ty"]
+}
