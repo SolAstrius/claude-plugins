@@ -1,0 +1,18 @@
+{
+  "ty": {
+    "command": "ty",
+    "args": ["server"],
+    "extensionToLanguage": {
+      ".py": "python",
+      ".pyi": "python"
+    }
+  },
+  "ruff": {
+    "command": "ruff",
+    "args": ["server"],
+    "extensionToLanguage": {
+      ".py": "python",
+      ".pyi": "python"
+    }
+  }
+}

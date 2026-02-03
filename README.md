@@ -21,7 +21,7 @@ Then install plugins:
 | Plugin | Description |
 |--------|-------------|
 | example-tools | Example plugin with a simple greeting skill |
-| ty-lsp | Python type checking and code intelligence via [ty](https://docs.astral.sh/ty/) (requires `ty` binary) |
+| astral-python | Python tooling via [ty](https://docs.astral.sh/ty/) + [Ruff](https://docs.astral.sh/ruff/) (requires `ty` and `ruff` binaries) |
 
 ## Creating New Plugins
 

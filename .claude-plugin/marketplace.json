@@ -15,11 +15,11 @@
       "version": "1.0.0"
     },
     {
-      "name": "ty-lsp",
-      "source": "./plugins/ty-lsp",
-      "description": "Python type checking and code intelligence via ty (Astral)",
+      "name": "astral-python",
+      "source": "./plugins/astral-python",
+      "description": "Python tooling via Astral's ty (type checking) and Ruff (linting/formatting)",
       "version": "1.0.0",
-      "keywords": ["python", "type-checking", "lsp", "astral"]
+      "keywords": ["python", "type-checking", "linting", "formatting", "lsp", "astral", "ty", "ruff"]
     }
   ]
 }

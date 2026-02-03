@@ -1,0 +1,10 @@
+{
+  "name": "astral-python",
+  "description": "Python tooling via Astral's ty (type checking) and Ruff (linting/formatting)",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "homepage": "https://astral.sh/",
+  "keywords": ["python", "type-checking", "linting", "formatting", "lsp", "astral", "ty", "ruff"]
+}
