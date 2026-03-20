@@ -1,0 +1,10 @@
+{
+  "name": "telegram",
+  "description": "Patched Telegram channel with markdown formatting, sticker support, and pack management",
+  "version": "0.0.2",
+  "author": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "homepage": "https://github.com/SolAstrius/claude-plugins",
+  "keywords": ["telegram", "channel", "stickers", "chat"]
+}
