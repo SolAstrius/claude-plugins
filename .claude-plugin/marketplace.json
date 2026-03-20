@@ -27,6 +27,13 @@
       "description": "Nix language support via nixd with nixfmt formatting",
       "version": "1.0.0",
       "keywords": ["nix", "nixos", "home-manager", "flakes", "lsp", "nixd", "nixfmt"]
+    },
+    {
+      "name": "telegram",
+      "source": "./plugins/telegram",
+      "description": "Patched Telegram channel with markdown formatting, sticker support, and pack management",
+      "version": "0.0.2",
+      "keywords": ["telegram", "channel", "stickers", "chat", "mcp"]
     }
   ]
 }
