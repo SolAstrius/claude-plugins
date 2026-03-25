@@ -18,7 +18,6 @@ import {
 import {
   MatrixClient,
   SimpleFsStorageProvider,
-  AutojoinRoomsMixin,
   RustSdkCryptoStorageProvider,
 } from 'matrix-bot-sdk'
 import { readFileSync, writeFileSync, mkdirSync, statSync, renameSync, realpathSync } from 'fs'
