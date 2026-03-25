@@ -104,12 +104,15 @@ function saveAccess(a: Access): void {
   renameSync(tmp, ACCESS_FILE)
 }
 
+// Track rooms that passed the inbound gate — these are safe for outbound too.
+// This covers DM rooms which aren't in access.rooms but are gated by allowFrom.
+const deliveredRooms = new Set<string>()
+
 // Outbound gate — reply/react/edit can only target rooms/DMs we're configured for.
 function assertAllowedRoom(room_id: string): void {
   const access = loadAccess()
   if (room_id in access.rooms) return
-  // For DMs, we check allowFrom — but we need the room to be known.
-  // If it's not in rooms, reject.
+  if (deliveredRooms.has(room_id)) return
   throw new Error(`room ${room_id} is not allowlisted — add via /matrix:access`)
 }
 
@@ -469,7 +472,34 @@ async function downloadMxcImage(mxcUrl: string, filename: string): Promise<strin
   }
 }
 
-AutojoinRoomsMixin.setupOnClient(client)
+// Auto-join rooms when invited by an allowlisted user, and auto-register
+// the room in access.json so messages are delivered.
+client.on('room.invite', async (roomId: string, event: any) => {
+  const inviter = event?.sender as string | undefined
+  if (!inviter) return
+
+  const access = loadAccess()
+  // Only accept invites from allowlisted DM users.
+  if (!access.allowFrom.includes(inviter)) {
+    process.stderr.write(`matrix channel: ignoring invite to ${roomId} from non-allowlisted ${inviter}\n`)
+    return
+  }
+
+  try {
+    await client.joinRoom(roomId)
+    process.stderr.write(`matrix channel: joined ${roomId} (invited by ${inviter})\n`)
+  } catch (err) {
+    process.stderr.write(`matrix channel: failed to join ${roomId}: ${err}\n`)
+    return
+  }
+
+  // Auto-register the room if not already known.
+  if (!(roomId in access.rooms)) {
+    access.rooms[roomId] = { allowFrom: [] }
+    saveAccess(access)
+    process.stderr.write(`matrix channel: auto-registered room ${roomId}\n`)
+  }
+})
 
 client.on('room.message', async (roomId: string, event: any) => {
   if (!event?.content) return
@@ -485,6 +515,9 @@ client.on('room.message', async (roomId: string, event: any) => {
   const isDm = await isDmRoom(roomId)
   const result = gate(roomId, senderId, isDm)
   if (result.action === 'drop') return
+
+  // Track this room so outbound replies are allowed.
+  deliveredRooms.add(roomId)
 
   let text = ''
   let imagePath: string | undefined
