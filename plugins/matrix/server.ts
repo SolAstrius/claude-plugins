@@ -570,11 +570,29 @@ client.on('room.message', async (roomId: string, event: any) => {
   })
 })
 
-// Start syncing
+// Start syncing — retry on crypto DB lock contention (previous process may
+// still be shutting down).
+async function startWithRetry(attempts = 5, delayMs = 2000): Promise<void> {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      botUserId = await client.getUserId()
+      process.stderr.write(`matrix channel: syncing as ${botUserId}\n`)
+      await client.start()
+      return
+    } catch (err) {
+      const msg = String(err)
+      if (msg.includes('could not acquire lock') && i < attempts - 1) {
+        process.stderr.write(`matrix channel: crypto DB locked, retrying in ${delayMs}ms (${i + 1}/${attempts})...\n`)
+        await new Promise(r => setTimeout(r, delayMs))
+        continue
+      }
+      throw err
+    }
+  }
+}
+
 try {
-  botUserId = await client.getUserId()
-  process.stderr.write(`matrix channel: syncing as ${botUserId}\n`)
-  await client.start()
+  await startWithRetry()
 } catch (err) {
   process.stderr.write(`matrix channel: failed to start: ${err}\n`)
   process.exit(1)
