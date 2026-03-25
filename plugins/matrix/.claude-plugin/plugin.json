@@ -1,0 +1,9 @@
+{
+  "name": "matrix",
+  "description": "Matrix channel — receive and reply to Matrix messages from Claude Code",
+  "version": "0.0.1",
+  "author": {
+    "name": "Sol Astrius Phoenix"
+  },
+  "keywords": ["matrix", "channel", "chat"]
+}

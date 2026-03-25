@@ -34,6 +34,13 @@
       "description": "Patched Telegram channel with markdown formatting, sticker support, and pack management",
       "version": "0.0.2",
       "keywords": ["telegram", "channel", "stickers", "chat", "mcp"]
+    },
+    {
+      "name": "matrix",
+      "source": "./plugins/matrix",
+      "description": "Matrix channel with E2EE support, room access control, and file attachments",
+      "version": "0.0.1",
+      "keywords": ["matrix", "channel", "chat", "e2ee", "mcp"]
     }
   ]
 }
