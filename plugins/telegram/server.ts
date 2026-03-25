@@ -748,12 +748,31 @@ async function handleInbound(
 
   const imagePath = downloadImage ? await downloadImage() : undefined
 
+  // Build reply/forward context if present.
+  const replyTo = ctx.message?.reply_to_message
+  const fwd = ctx.message?.forward_origin ?? (ctx.message?.forward_from ? { type: 'user' } : null)
+
+  let replyContext = ''
+  if (replyTo) {
+    const replyUser = replyTo.from?.username ?? String(replyTo.from?.id ?? 'unknown')
+    const replyText = (replyTo as any).text ?? (replyTo as any).caption ?? ''
+    replyContext = `[reply to ${replyUser}: ${replyText.slice(0, 200)}]\n`
+  }
+  if (fwd) {
+    const fwdName = (ctx.message as any).forward_from?.username
+      ?? (ctx.message as any).forward_sender_name
+      ?? 'unknown'
+    replyContext += `[forwarded from ${fwdName}]\n`
+  }
+
+  const fullText = replyContext + text
+
   // image_path goes in meta only — an in-content "[image attached — read: PATH]"
   // annotation is forgeable by any allowlisted sender typing that string.
   void mcp.notification({
     method: 'notifications/claude/channel',
     params: {
-      content: text,
+      content: fullText,
       meta: {
         chat_id,
         ...(msgId != null ? { message_id: String(msgId) } : {}),
